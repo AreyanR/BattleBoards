@@ -1,20 +1,50 @@
 class ChessPiece:
    def __init__(self, color, name, health):
+       """
+       Initialize a chess piece with its color, name, and health.
+
+       :param color: The color of the chess piece ('white' or 'black').
+       :param name: The name of the chess piece.
+       :param health: The health points of the chess piece.
+       """
        self.color = color
        self.name = name
        self.health = health
        self.special_attack_uses = {}
 
    def decrease_health(self, damage):
+       """
+       Decrease the health of the chess piece by the given amount of damage.
+
+       :param damage: The amount of damage to be subtracted from the health.
+       """
        self.health -= damage
 
    def __str__(self):
+       """
+       Return the symbol representing the chess piece when converted to a string.
+       """
        return self.symbol
 
    def valid_moves(self, row, col, board):
+       """
+       Return a list of valid moves for the chess piece on the given board at the specified position.
+
+       :param row: The row index of the chess piece on the board.
+       :param col: The column index of the chess piece on the board.
+       :param board: The chess board as a 2D list.
+       :return: A list of valid moves as (row, col) tuples.
+       """
        return []
 
    def attack(self, target_piece, attack_name):
+       """
+       Perform an attack on the target piece with the specified attack name.
+
+       :param target_piece: The target chess piece to be attacked.
+       :param attack_name: The name of the attack to be used.
+       :return: True if the attack was successful, False otherwise.
+       """
        if attack_name in self.attacks:
            if attack_name in self.special_attack_uses and self.special_attack_uses[attack_name] > 0:
                damage = self.attacks[attack_name]
@@ -234,20 +264,31 @@ class Pawn(ChessPiece):
 
 
 def initialize_board():
-  board = [[None for _ in range(8)] for _ in range(8)]
-  initial_pieces = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
-  for col in range(8):
+    """
+    Initialize the chess board with the initial postions.
+
+    :return: The initialized chess board as a 2D list.
+    """
+    board = [[None for _ in range(8)] for _ in range(8)]
+    initial_pieces = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
+    for col in range(8):
       board[0][col] = initial_pieces[col]('black')
       board[1][col] = Pawn('black')
       board[6][col] = Pawn('white')
       board[7][col] = initial_pieces[col]('white')
-  return board
+    return board
 
 
 def display_board(board, battle_grid=None):
-  print("  a b c d e f g h")
+    """
+    Display the current state of the chess board, including the battle grid.
 
-  for i, row in enumerate(board):
+    :param board: The chess board as a 2D list.
+    :param battle_grid: The battle grid.
+    """
+    print("  a b c d e f g h")
+
+    for i, row in enumerate(board):
       print(f"{8 - i} ", end="")
       for piece in row:
           if piece is None:
@@ -256,7 +297,7 @@ def display_board(board, battle_grid=None):
               print(f"\033[1m{piece}\033[0m ", end="")
       print(f"{8 - i}")
 
-  if battle_grid:
+    if battle_grid:
       print("\nBattle:")
       for row in battle_grid:
           for cell in row:
@@ -265,11 +306,21 @@ def display_board(board, battle_grid=None):
       print("\nPlayers' Health:")
       print("\nPlayers' Moves:")
       print()
-  else:
+    else:
       print("  a b c d e f g h")
 
 
 def battle_scene(piece1, piece2, board, start_pos, end_pos):
+    """
+    Simulate a battle scene between two chess pieces and update their health.
+
+    :param piece1: The first chess piece participating in the battle.
+    :param piece2: The second chess piece participating in the battle.
+    :param board: The chess board as a 2D list.
+    :param start_pos: The starting position of the battle.
+    :param end_pos: The ending position of the battle.
+    :return: The winner of the battle (the surviving piece).
+    """
     piece1_name = piece1.name
     piece2_name = piece2.name
     piece1_health = piece1.health
@@ -367,12 +418,27 @@ def battle_scene(piece1, piece2, board, start_pos, end_pos):
 
 
 def convert_to_coordinates(pos):
-  col = ord(pos[0]) - ord('a')
-  row = 8 - int(pos[1])
-  return row, col
+    """
+    Convert a chess position string (e.g., 'e2') to row and column coordinates.
+
+    :param pos: The position string (e.g., 'e2').
+    :return: A tuple containing row and column coordinates.
+    """
+    col = ord(pos[0]) - ord('a')
+    row = 8 - int(pos[1])
+    return row, col
 
 
 def is_valid_move(start_pos, end_pos, board, current_turn):
+    """
+   Check if a move from start_pos to end_pos is a valid chess move.
+
+   :param start_pos: The starting position of the move.
+   :param end_pos: The ending position of the move.
+   :param board: The chess board as a 2D list.
+   :param current_turn: The current player's turn ('white' or 'black').
+   :return: True if the move is valid, otherwise False.
+   """
     start_row, start_col = convert_to_coordinates(start_pos)
     end_row, end_col = convert_to_coordinates(end_pos)
 
@@ -404,17 +470,34 @@ def is_valid_move(start_pos, end_pos, board, current_turn):
 
 
 def check_collision(board, start_pos, end_pos):
-  start_row, start_col = convert_to_coordinates(start_pos)
-  end_row, end_col = convert_to_coordinates(end_pos)
+    """
+    Check if there is a collision (piece of the opposite color) between two positions on the chess board.
 
-  start_piece = board[start_row][start_col]
-  end_piece = board[end_row][end_col]
+    :param board: The chess board as a 2D list.
+    :param start_pos: The starting position.
+    :param end_pos: The ending position.
+    :return: True if there is a collision,otherwise False .
+    """
+    start_row, start_col = convert_to_coordinates(start_pos)
+    end_row, end_col = convert_to_coordinates(end_pos)
 
-  return end_piece is not None and end_piece.color != start_piece.color
+    start_piece = board[start_row][start_col]
+    end_piece = board[end_row][end_col]
+
+    return end_piece is not None and end_piece.color != start_piece.color
 
 
 def get_move(turn, board, collision=False):
-   while True:
+    """
+    Get a valid move from the player for their current turn.
+
+    :param turn: The current player's turn ('white' or 'black').
+    :param board: The chess board as a 2D list.
+    :param collision: Whether collision checking is enabled for the move.
+    :return: A tuple containing the starting and ending positions of the move.
+    """
+
+    while True:
        move = input(f"{turn.capitalize()}'s turn. Enter your move (e.g., 'e2 e3'): ").strip().lower()
 
        if not move:
@@ -437,6 +520,14 @@ def get_move(turn, board, collision=False):
 
 
 def update_board(board, start, end, turn):
+    """
+    Update the chess board after a valid move is made.
+
+    :param board: The chess board as a 2D list.
+    :param start: The starting position of the move.
+    :param end: The ending position of the move.
+    :param turn: The current player's turn ('white' or 'black').
+    """
     start_row, start_col = convert_to_coordinates(start)
     end_row, end_col = convert_to_coordinates(end)
     piece = board[start_row][start_col]
@@ -462,6 +553,9 @@ def update_board(board, start, end, turn):
 
 
 def play_game():
+    """
+    Play a game of chess until it's over.
+    """
     board = initialize_board()
     turn = 'white'
 
@@ -496,12 +590,20 @@ def play_game():
 
 
 def is_game_over(board, turn):
-   king_symbol = 'K' if turn == 'black' else 'k'
-   for row in board:
+    """
+    Check if the game is over (one of the kings is defeated).
+
+    :param board: The chess board as a 2D list.
+    :param turn: The current player's turn ('white' or 'black').
+    :return: True if the game is over, False otherwise.
+    """
+
+    king_symbol = 'K' if turn == 'black' else 'k'
+    for row in board:
        for piece in row:
            if isinstance(piece, King) and piece.symbol == king_symbol:
                return False
-   return True
+    return True
 
 
 if __name__ == "__main__":

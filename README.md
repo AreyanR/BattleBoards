@@ -59,7 +59,7 @@ To win the game, you must strategically plan your moves, make successful piece c
 
 ## Installation
 
-To play BoardBattles, follow these steps:
+To play BoardBattles, follow these steps in your terminal:
 
 1. Clone the GitHub repository:
    ```bash

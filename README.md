@@ -2,7 +2,7 @@
 
 ## Game Overview
 
-This is the first game I have ever created. I made it in Python because, at the time, it was the only language I knew well enough. It's a mini-game built for the terminal. It is a blend of chess and Pokémon-style battles.
+This is the first game I have ever created. It's a mini-game played on a terminal built with Python. Long story short, it is a blend of chess and Pokémon-style battles.
 
 In BoardBattles, the objective is to eliminate the opponent's king through strategic gameplay and successful piece captures. Players take turns moving their pieces on the board, and when one piece captures an opponent's piece, a combat sequence begins.
 

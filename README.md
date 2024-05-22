@@ -79,6 +79,6 @@ To play BoardBattles, follow these steps in your terminal:
 
 - Game developed by Areyan Rastawan
 
-Feel free to reach out to me at areaynr@hotmail.com if you have anything to say about the game.
+Feel free to reach out to me at areyanr@hotmail.com if you have anything to say about the game.
 
 Have fun playing BoardBattles with your friends!

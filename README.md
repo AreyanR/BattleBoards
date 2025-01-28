@@ -2,8 +2,6 @@
 
 ## Game Overview
 
-This is the first game I have ever created. It's a mini-game played on a terminal built with Python. Long story short, it is a blend of chess and Pokémon-style battles.
-
 In BoardBattles, the objective is to eliminate the opponent's king through strategic gameplay and successful piece captures. Players take turns moving their pieces on the board, and when one piece captures an opponent's piece, a combat sequence begins.
 
 Each chess piece has its own health and attack power. The player who initiates the capture attack goes first in the combat phase. Players can choose from their piece's available attacks, taking turns attacking each other's pieces.
@@ -59,26 +57,21 @@ To win the game, you must strategically plan your moves, make successful piece c
 
 ## Installation
 
-To play BoardBattles, follow these steps in your terminal:
+To play BoardBattles, follow these steps:
 
-1. Clone the GitHub repository:
-   ```bash
-   git clone https://github.com/AreyanR/BattleBoards.git
-   ```
-2. Navigate to the location of the cloned repository:
-   ```bash
-   cd BattleBoards
-   ```
-3. Run the game:
-   ```bash
-   python3 BattleBoards.py
-   ```
-4. Enjoy the game!
+1. Download the Python file from the repository.
+2. Run it on any Python IDE or terminal with Python installed.
+3. Enjoy the game!
+
+## Preview
+
+![Preview](images/preview.png)
 
 ## Credits
 
 - Game developed by Areyan Rastawan
 
-Feel free to reach out to me at areyanr@hotmail.com if you have anything to say about the game.
+Feel free to reach out to me at areaynr@hotmail.com if you have anything to say about the game.
 
 Have fun playing BoardBattles with your friends!
+
